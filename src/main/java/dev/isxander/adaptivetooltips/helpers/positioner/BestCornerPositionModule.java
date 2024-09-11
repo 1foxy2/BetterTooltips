@@ -1,6 +1,6 @@
 package dev.isxander.adaptivetooltips.helpers.positioner;
 
-import dev.isxander.adaptivetooltips.config.AdaptiveTooltipConfig;
+import dev.isxander.adaptivetooltips.BetterTooltips;
 import org.joml.Vector2i;
 import org.joml.Vector2ic;
 
@@ -10,10 +10,10 @@ import java.util.TreeMap;
 public class BestCornerPositionModule implements TooltipPositionModule {
     @Override
     public Optional<Vector2ic> repositionTooltip(int x, int y, int width, int height, int mouseX, int mouseY, int screenWidth, int screenHeight) {
-        if (!AdaptiveTooltipConfig.HANDLER.instance().bestCorner)
+        if (!BetterTooltips.getConfig().bestCorner.get())
             return Optional.empty();
 
-        if ((x < 4 || y < 4) || AdaptiveTooltipConfig.HANDLER.instance().alwaysBestCorner) {
+        if ((x < 4 || y < 4) || BetterTooltips.getConfig().alwaysBestCorner.get()) {
             int topObstruction = Math.max(5 + height - mouseY, 0);
             int bottomObstruction = Math.max(mouseY - (screenHeight - 5 - height), 0);
             int leftObstruction = Math.max((5 + width - mouseX), 0);

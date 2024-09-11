@@ -1,7 +1,7 @@
 package dev.isxander.adaptivetooltips.mixins;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import dev.isxander.adaptivetooltips.config.AdaptiveTooltipConfig;
+import dev.isxander.adaptivetooltips.BetterTooltips;
 import net.minecraft.client.gui.screens.inventory.tooltip.TooltipRenderUtil;
 import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +26,7 @@ public class TooltipRenderUtilMixin {
                 prevColor.getGreen(),
                 prevColor.getBlue(),
                 (int) Mth.clamp(
-                        prevColor.getAlpha() * AdaptiveTooltipConfig.HANDLER.instance().tooltipTransparency,
+                        prevColor.getAlpha() * BetterTooltips.getConfig().tooltipTransparency.get(),
                         0, 255
                 )
         ).getRGB();

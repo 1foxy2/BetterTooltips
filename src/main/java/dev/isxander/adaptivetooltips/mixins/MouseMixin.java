@@ -1,9 +1,10 @@
 package dev.isxander.adaptivetooltips.mixins;
 
-import com.llamalad7.mixinextras.injector.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.platform.InputConstants;
-import dev.isxander.adaptivetooltips.config.AdaptiveTooltipConfig;
 import dev.isxander.adaptivetooltips.helpers.ScrollTracker;
+import dev.isxander.adaptivetooltips.utils.ModKeyBinds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.gui.screens.Screen;
@@ -16,18 +17,18 @@ import org.spongepowered.asm.mixin.injection.At;
 public class MouseMixin {
     @Shadow @Final private Minecraft minecraft;
 
-    @WrapWithCondition(method = "onScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;mouseScrolled(DDDD)Z"))
-    private boolean trackMouseWheel(Screen screen, double mouseX, double mouseY, double horizontalAmount, double verticalAmount, long window, double horizontal, double vertical) {
-        if (InputConstants.isKeyDown(minecraft.getWindow().getWindow(), AdaptiveTooltipConfig.HANDLER.instance().scrollKeyCode)) {
-            if (InputConstants.isKeyDown(minecraft.getWindow().getWindow(), AdaptiveTooltipConfig.HANDLER.instance().horizontalScrollKeyCode)) {
-                ScrollTracker.addHorizontalScroll((int) Math.signum(vertical));
+    @WrapOperation(method = "onScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;mouseScrolled(DDDD)Z"))
+    private boolean trackMouseWheel(Screen instance, double mouseX, double mouseY, double scrollX, double scrollY, Operation<Boolean> original) {
+        if (InputConstants.isKeyDown(minecraft.getWindow().getWindow(),ModKeyBinds.SCROLL_KEY.get().getKey().getValue())) {
+            if (InputConstants.isKeyDown(minecraft.getWindow().getWindow(), ModKeyBinds.HORIZONTAL_SCROLL_KEY.get().getKey().getValue())) {
+                ScrollTracker.addHorizontalScroll((int) Math.signum(scrollY));
             } else {
-                ScrollTracker.addVerticalScroll((int) Math.signum(vertical));
-                ScrollTracker.addHorizontalScroll((int) Math.signum(horizontal));
+                ScrollTracker.addVerticalScroll((int) Math.signum(scrollY));
+                ScrollTracker.addHorizontalScroll((int) Math.signum(scrollX));
             }
             return false;
         }
 
-        return true;
+        return original.call(instance, mouseX, mouseY, scrollX, scrollY);
     }
 }

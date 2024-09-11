@@ -1,10 +1,13 @@
 package dev.isxander.adaptivetooltips.helpers;
 
-import dev.isxander.adaptivetooltips.config.AdaptiveTooltipConfig;
+import dev.isxander.adaptivetooltips.BetterTooltips;
 import dev.isxander.adaptivetooltips.mixins.ClientTextTooltipAccessor;
 import dev.isxander.adaptivetooltips.utils.TextUtil;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.screens.inventory.tooltip.*;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTextTooltip;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 
@@ -19,7 +22,7 @@ public class TooltipWrapper {
         int maxWidth = getMaxWidth(textRenderer, lines);
 
         int allowedMaxWidth = 0;
-        switch (AdaptiveTooltipConfig.HANDLER.instance().wrapText) {
+        switch (BetterTooltips.getConfig().wrapText.get()) {
             case OFF ->
                     allowedMaxWidth = Integer.MAX_VALUE; // max_value essentially bypasses wrapping using the check below
             case SCREEN_WIDTH ->
