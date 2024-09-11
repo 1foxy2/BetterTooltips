@@ -17,6 +17,7 @@ public class BetterTooltipsConfig {
     public final ModConfigSpec.IntValue horizontalScrollSensitivity;
     public final ModConfigSpec.DoubleValue tooltipTransparency;
     public final ModConfigSpec.BooleanValue removeFirstLinePadding;
+    public final ModConfigSpec.BooleanValue useYACLTooltipPositioner;
     public final ModConfigSpec.EnumValue<WrapText> wrapText;
     public final ModConfigSpec.EnumValue<ScrollDirection> scrollDirection;
 
@@ -41,6 +42,8 @@ public class BetterTooltipsConfig {
                 .define("preventVanillaClamping", true);
         onlyRepositionHoverTooltips = builder
                 .define("onlyRepositionHoverTooltips", true);
+        useYACLTooltipPositioner = builder
+                .define("useYACLTooltipPositioner", false);
         builder.pop();
 
         builder.push("scrolling");
