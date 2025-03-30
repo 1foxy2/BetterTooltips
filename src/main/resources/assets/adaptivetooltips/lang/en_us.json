@@ -1,4 +1,7 @@
 {
+  "key.category.better_tooltips": "Adaptive Tooltips",
+  "key.better_tooltips.horizontal_scroll_key": "Horizontal Scroll",
+  "key.better_tooltips.scroll_key": "Scroll",
   "better_tooltips.configuration.category.adaptivetooltips": "Adaptive Tooltips",
   "better_tooltips.configuration.content_manipulation": "Content Manipulation",
   "better_tooltips.configuration.content_manipulation.tooltip": "This group of options modifies the content of the tooltip.",
