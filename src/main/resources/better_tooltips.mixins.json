@@ -2,6 +2,7 @@
   "package": "dev.isxander.adaptivetooltips.mixins",
   "required": true,
   "minVersion": "0.8",
+  "plugin": "dev.isxander.adaptivetooltips.BetterTooltipsMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "client": [
     "BundleTooltipComponentAccessor",
@@ -12,6 +13,8 @@
     "HoveredTooltipPositionerMixin",
     "MouseMixin",
     "TooltipMixin",
-    "TooltipRenderUtilMixin"
+    "TooltipRenderUtilMixin",
+    "ClientHooksMixin",
+    "ImmersiveTooltipsDrawerMixin"
   ]
 }

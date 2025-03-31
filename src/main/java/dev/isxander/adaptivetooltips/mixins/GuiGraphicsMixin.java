@@ -38,20 +38,6 @@ public abstract class GuiGraphicsMixin {
 
     @Shadow public abstract int guiHeight();
 
-    @Shadow
-    protected abstract void renderTooltipInternal(Font font, List<ClientTooltipComponent> components, int mouseX, int mouseY, ClientTooltipPositioner tooltipPositioner);
-
-    @Inject(method = "renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;II)V", at = @At("HEAD"),cancellable = true)
-    private void removeNeoforgeWrapping(Font font, List<Component> tooltipLines, Optional<TooltipComponent> visualTooltipComponent, int mouseX, int mouseY, CallbackInfo ci) {
-        List<ClientTooltipComponent> list = (List<ClientTooltipComponent>)tooltipLines.stream()
-                .map(Component::getVisualOrderText)
-                .map(ClientTooltipComponent::create)
-                .collect(Util.toMutableList());
-        visualTooltipComponent.ifPresent(tooltipComponent -> list.add(list.isEmpty() ? 0 : 1, ClientTooltipComponent.create(tooltipComponent)));
-        this.renderTooltipInternal(font, list, mouseX, mouseY, DefaultTooltipPositioner.INSTANCE);
-        ci.cancel();
-    }
-
     // wrapping
     @ModifyVariable(method = "renderTooltipInternal", at = @At("HEAD"), argsOnly = true)
     private List<ClientTooltipComponent> modifyTooltip(List<ClientTooltipComponent> tooltip, Font font, List<ClientTooltipComponent> dontuse, int x, int y, ClientTooltipPositioner positioner) {
