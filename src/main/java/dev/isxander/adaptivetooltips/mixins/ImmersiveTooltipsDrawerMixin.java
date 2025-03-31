@@ -36,12 +36,12 @@ public class ImmersiveTooltipsDrawerMixin {
         listLocalRef.set(TooltipWrapper.wrapComponents(tooltip, font, guiGraphics.guiWidth(), guiGraphics.guiHeight(), x, positioner));
     }
 
-    @WrapOperation(method = "drawTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;positionTooltip(IIIIII)Lorg/joml/Vector2ic;"))
+    @WrapOperation(method = "drawTooltip", require = 1,at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;positionTooltip(IIIIII)Lorg/joml/Vector2ic;"))
     private Vector2ic moveTooltip(ClientTooltipPositioner positioner, int screenWidth, int screenHeight,
                                   int x, int y, int width, int height, Operation<Vector2ic> operation,
-                                  @Local Font font, @Local List<ClientTooltipComponent> tooltip,
-                                  @Local int mouseX, @Local int mouseY, @Local GuiGraphics guiGraphics) {
-        Vector2ic currentPosition = operation.call(positioner, screenWidth, screenHeight, mouseX, mouseY, width, height);
+                                  @Local(argsOnly = true) Font font, @Local(argsOnly = true) List<ClientTooltipComponent> tooltip,
+                                  @Local(argsOnly = true) GuiGraphics guiGraphics) {
+        Vector2ic currentPosition = operation.call(positioner, screenWidth, screenHeight, x, y, width, height);
 
         guiGraphics.pose().pushPose(); // injection is before matrices.push()
 
@@ -58,7 +58,7 @@ public class ImmersiveTooltipsDrawerMixin {
                 currentPosition = position.get();
         }
 
-        ScrollTracker.scroll((GuiGraphics) (Object) this, tooltip, currentPosition.x(), currentPosition.y(), width, height, screenWidth, screenHeight);
+        ScrollTracker.scroll(guiGraphics, tooltip, currentPosition.x(), currentPosition.y(), width, height, screenWidth, screenHeight);
 
         return currentPosition;
     }

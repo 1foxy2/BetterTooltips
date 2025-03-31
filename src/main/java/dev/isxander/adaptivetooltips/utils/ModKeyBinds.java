@@ -1,7 +1,6 @@
 package dev.isxander.adaptivetooltips.utils;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.logging.LogUtils;
 import dev.isxander.adaptivetooltips.BetterTooltips;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.api.distmarker.Dist;

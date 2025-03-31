@@ -3,7 +3,6 @@ package dev.isxander.adaptivetooltips.mixins;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.logging.LogUtils;
 import dev.isxander.adaptivetooltips.BetterTooltips;
 import dev.isxander.adaptivetooltips.helpers.ScrollTracker;
 import dev.isxander.adaptivetooltips.helpers.TooltipWrapper;

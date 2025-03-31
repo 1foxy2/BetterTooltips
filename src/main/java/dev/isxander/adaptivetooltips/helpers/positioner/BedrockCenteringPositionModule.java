@@ -1,6 +1,5 @@
 package dev.isxander.adaptivetooltips.helpers.positioner;
 
-import com.mojang.logging.LogUtils;
 import dev.isxander.adaptivetooltips.BetterTooltips;
 import net.minecraft.util.Mth;
 import org.joml.Vector2i;
