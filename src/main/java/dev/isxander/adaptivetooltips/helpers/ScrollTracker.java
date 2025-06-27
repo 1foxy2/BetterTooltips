@@ -136,8 +136,8 @@ public class ScrollTracker {
                 if (i1.hasNext() || i2.hasNext())
                     return false;
             } else {
-                // no other vanilla implementations of TooltipComponent or the two components are different to eachother
-                return false;
+                if (c1.getHeight() != c2.getHeight() && c1.getClass() != c2.getClass())
+                    return false;
             }
         }
 

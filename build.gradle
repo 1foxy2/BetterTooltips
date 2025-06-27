@@ -59,10 +59,14 @@ repositories {
                 maven {
                     name = "Modrinth"
                     url = "https://api.modrinth.com/maven"
+                },
+                maven {
+                    url "https://cursemaven.com"
                 }
         )
         filter {
             includeGroup "maven.modrinth"
+            includeGroup "curse.maven"
         }
     }
 }
@@ -70,6 +74,12 @@ repositories {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     compileOnly "maven.modrinth:immersive-tooltip:1.21-1.3.1"
+    implementation "curse.maven:apotheosis-313970:6545942"
+    implementation "curse.maven:apothic-enchanting-1063926:6631673"
+    implementation "curse.maven:apothic-attributes-898963:6514649"
+    implementation "curse.maven:apothic-spawners-986583:6689771"
+    implementation "curse.maven:patchouli-306770:6164617"
+    implementation "curse.maven:placebo-283644:6446766"
 }
 
 tasks.withType(ProcessResources).configureEach {
